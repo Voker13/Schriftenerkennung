@@ -23,24 +23,12 @@ public class Main {
 		pixel[x][y] = new RGB(bi.getRaster().getPixel(x, y, new int[4]), x, y, bi.getWidth() * y + x);
 	    }
 	}
-	// Get subimage with perfect height
-	int start = Picture.getMinHeight(pixel, bi.getWidth(), bi.getHeight());
-	bi = bi.getSubimage(0, start, bi.getWidth(), Picture.getRowHeight(bi));
-
-	// rescale pixel-array
-	pixel = new RGB[bi.getWidth()][bi.getHeight()];
-	for (int y = 0; y < bi.getHeight(); y++) {
-	    for (int x = 0; x < bi.getWidth(); x++) {
-		pixel[x][y] = new RGB(bi.getRaster().getPixel(x, y, new int[4]), x, y, bi.getWidth() * y + x);
-	    }
-	}
-	RGB[][] firstCharacter = Picture.getCharacterPixels(pixel, bi.getWidth(), bi.getHeight());
 	
 	ArrayList<RGB> dataPoints = new ArrayList<>();
-	for (int y = 0; y < firstCharacter[0].length; y++) {
-	    for (int x = 0; x < firstCharacter.length; x++) {
+	for (int y = 0; y < bi.getHeight(); y++) {
+	    for (int x = 0; x < bi.getWidth(); x++) {
 		if (pixel[x][y].isBlack()) {
-		    dataPoints.add(firstCharacter[x][y]);
+		    dataPoints.add(pixel[x][y]);
 		}
 	    }
 	}
