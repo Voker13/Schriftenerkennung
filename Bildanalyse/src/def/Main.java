@@ -8,12 +8,12 @@ import javax.imageio.ImageIO;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	int k = 3;
+	int k = 4;
 	Database.initialize(k);
 	
 	BufferedImage bi = null;
 	try {
-	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/B.png"));
+	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/A.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -34,7 +34,7 @@ public class Main {
 	    }
 	}
 
-	ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints);
+	ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints, bi.getWidth(), bi.getHeight());
 
 	System.out.println(Database.getCharacter(centroids));
 
@@ -49,7 +49,7 @@ public class Main {
 	}
 
 	
-	System.out.println("Zeilenhöhe: " + Picture.getRowHeight(bi));
+	System.out.println("Zeilenhï¿½he: " + Picture.getRowHeight(bi));
 
 	System.out.println(k + " " + numberItems);
 

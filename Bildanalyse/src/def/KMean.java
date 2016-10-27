@@ -17,7 +17,7 @@ public class KMean {
 	
 	for (int i=0; i<k; i++) {
 		for (int j=0; j<k; j++) {
-			centroids.add(new Centroid(i*width/k+width/(2*k), j*height/k+height/(2*k)));
+			centroids.add(new Centroid(i*width/(k+1)+width/(k+1), j*height/(k+1)+height/(k+1)));
 		}
 	}
 	
