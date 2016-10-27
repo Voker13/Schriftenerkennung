@@ -13,6 +13,10 @@ public class Centroid {
 	this.mY = newY;
 	return;
     }
+    
+    public String toString() {
+    	return "mX: "+mX+" mY: "+mY;
+    }
 
     public void X(double newX) {
 	this.mX = newX;
