@@ -106,7 +106,8 @@ public class Picture {
     }
     
     public static BufferedImage getCharacterImage(BufferedImage bi) {
-	
+	int x_offset = getCharacterStart(null,bi.getWidth(),bi.getHeight());
+	int width = getCharacterEnd(null,bi.getWidth(),bi.getHeight(),0);
 	
 	return null;
     }

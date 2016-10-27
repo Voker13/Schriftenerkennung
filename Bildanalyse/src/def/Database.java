@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Database {
 
-    static int k = 4;
+    static int k;
 
     static DatabaseEntry A;
     static DatabaseEntry B;
@@ -20,7 +20,9 @@ public class Database {
 
     static ArrayList<DatabaseEntry> database;
 
-    public static void initialize() throws IOException {
+    public static void initialize(int clusterNumber) throws IOException {
+	k = clusterNumber;
+	
 	A = new DatabaseEntry("A", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/A.png"))));
 	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/B.png"))));
 	C = new DatabaseEntry("C", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/C.png"))));

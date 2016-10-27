@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	Database.initialize();
+	int k = 3;
+	Database.initialize(k);
 	
 	BufferedImage bi = null;
 	try {
@@ -32,8 +33,6 @@ public class Main {
 		}
 	    }
 	}
-	
-	int k = 4;
 
 	ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints);
 
