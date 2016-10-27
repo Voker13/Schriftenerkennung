@@ -34,7 +34,7 @@ public class Main {
 		pixel[x][y] = new RGB(bi.getRaster().getPixel(x, y, new int[4]), x, y, bi.getWidth() * y + x);
 	    }
 	}
-	RGB[][] firstCharacter = Picture.getCharacter(pixel, bi.getWidth(), bi.getHeight());
+	RGB[][] firstCharacter = Picture.getCharacterPixels(pixel, bi.getWidth(), bi.getHeight());
 	
 	ArrayList<RGB> dataPoints = new ArrayList<>();
 	for (int y = 0; y < firstCharacter[0].length; y++) {

@@ -87,7 +87,7 @@ public class Picture {
 	return width + i;
     }
 
-    public static RGB[][] getCharacter(RGB[][] pixel, int w, int h) {
+    public static RGB[][] getCharacterPixels(RGB[][] pixel, int w, int h) {
 	int firstPixelAt = getCharacterStart(pixel, w, h);
 	System.out.println("First pixel at: " + firstPixelAt);
 
@@ -103,6 +103,12 @@ public class Picture {
 	}
 
 	return character;
+    }
+    
+    public static BufferedImage getCharacterImage() {
+	
+	
+	return null;
     }
 
 }

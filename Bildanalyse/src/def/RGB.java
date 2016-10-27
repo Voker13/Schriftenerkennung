@@ -35,6 +35,7 @@ public class RGB {
 	else return false;
     }
     
+    @Override
     public String toString() {
 	return "Red: " + red + " Green: " + green + " Blue: " + blue;
     }
