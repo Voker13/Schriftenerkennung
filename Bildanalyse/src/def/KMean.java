@@ -32,7 +32,7 @@ public class KMean {
 //	centroids.add(new Centroid(35,35));
     }
     
-    public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi, int width, int height) {
+    public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi) {
 	
 	RGB[][] pixel = new RGB[bi.getWidth()][bi.getHeight()];
 	
@@ -51,7 +51,7 @@ public class KMean {
 	    }
 	}
 	
-	return kMeanCluster(k,dataPoints,width,height);
+	return kMeanCluster(k,dataPoints,bi.getWidth(),bi.getHeight());
     }
 
     public static ArrayList<Centroid> kMeanCluster(int k, ArrayList<RGB> pix, int width, int height) {

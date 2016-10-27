@@ -52,7 +52,7 @@ public class Picture {
 
     }
 
-    public static int getCharacterStart(RGB[][] pixel, int w, int h) {
+    public static int getCharacterStartX(RGB[][] pixel, int w, int h) {
 	int width = 1000000;
 
 	for (int y = 0; y < h; y++) {
@@ -66,7 +66,7 @@ public class Picture {
 	return width;
     }
 
-    public static int getCharacterEnd(RGB[][] pixel, int w, int h, int i) {
+    public static int getCharacterEndX(RGB[][] pixel, int w, int h, int i) {
 	int width = 0;
 
 	for (int x = 0; x < w; x++) {
@@ -88,10 +88,10 @@ public class Picture {
     }
 
     public static RGB[][] getCharacterPixels(RGB[][] pixel, int w, int h) {
-	int firstPixelAt = getCharacterStart(pixel, w, h);
+	int firstPixelAt = getCharacterStartX(pixel, w, h);
 	System.out.println("First pixel at: " + firstPixelAt);
 
-	int lastPixelAt = getCharacterEnd(pixel, w, h, firstPixelAt);
+	int lastPixelAt = getCharacterEndX(pixel, w, h, firstPixelAt);
 	System.out.println("Last pixel at: " + lastPixelAt);
 
 	RGB[][] character = new RGB[lastPixelAt - firstPixelAt][h];
@@ -106,10 +106,12 @@ public class Picture {
     }
     
     public static BufferedImage getCharacterImage(BufferedImage bi) {
-	int x_offset = getCharacterStart(null,bi.getWidth(),bi.getHeight());
-	int width = getCharacterEnd(null,bi.getWidth(),bi.getHeight(),0);
+	int x_offset = getCharacterStartX(null,bi.getWidth(),bi.getHeight());
+	int width = getCharacterEndX(null,bi.getWidth(),bi.getHeight(),x_offset);
+	int y_offset = 0;
+	int height = 0;
 	
-	return null;
+	return bi.getSubimage(x_offset, y_offset, width, height);
     }
 
 }
