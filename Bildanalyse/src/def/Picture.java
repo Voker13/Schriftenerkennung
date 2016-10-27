@@ -1,4 +1,5 @@
 package def;
+
 import java.awt.image.BufferedImage;
 
 public class Picture {
@@ -86,6 +87,10 @@ public class Picture {
 
 	return width + i;
     }
+    
+    public static int getCharacterStartY() {
+	return 0;
+    }
 
     public static RGB[][] getCharacterPixels(RGB[][] pixel, int w, int h) {
 	int firstPixelAt = getCharacterStartX(pixel, w, h);
@@ -98,19 +103,19 @@ public class Picture {
 
 	for (int y = 0; y < h; y++) {
 	    for (int x = 0; x < lastPixelAt - firstPixelAt; x++) {
-		character[x][y] = pixel[x+firstPixelAt][y];
+		character[x][y] = pixel[x + firstPixelAt][y];
 	    }
 	}
 
 	return character;
     }
-    
-    public static BufferedImage getCharacterImage(BufferedImage bi) {
-	int x_offset = getCharacterStartX(null,bi.getWidth(),bi.getHeight());
-	int width = getCharacterEndX(null,bi.getWidth(),bi.getHeight(),x_offset);
+
+    public static BufferedImage getCharacterImage(BufferedImage bi, RGB[][] pixel) {
+	int x_offset = getCharacterStartX(pixel, bi.getWidth(), bi.getHeight());
+	int width = getCharacterEndX(pixel, bi.getWidth(), bi.getHeight(), x_offset);
 	int y_offset = 0;
 	int height = 0;
-	
+
 	return bi.getSubimage(x_offset, y_offset, width, height);
     }
 

@@ -8,12 +8,12 @@ import javax.imageio.ImageIO;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	int k = 4;
+	int k = 2;
 	Database.initialize(k);
 	
 	BufferedImage bi = null;
 	try {
-	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/A.png"));
+	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/C.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -37,26 +37,6 @@ public class Main {
 	ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints, bi.getWidth(), bi.getHeight());
 
 	System.out.println(Database.getCharacter(centroids));
-
-	/*
-	dataPoints = new ArrayList<>();
-	for (int y = 0; y < bi.getHeight(); y++) {
-	    for (int x = 0; x < bi.getWidth(); x++) {
-		if (pixel[x][y].isBlack()) {
-		    dataPoints.add(pixel[x][y]);
-		}
-	    }
-	}
-
-	
-	System.out.println("Zeilenh�he: " + Picture.getRowHeight(bi));
-
-	System.out.println(k + " " + numberItems);
-
-	KMean.kMeanCluster(k, dataPoints);
-
-	System.out.println(Database.getCharacter(KMean.centroids));
-	*/
 
 	// Print out centroid results.
 	System.out.println("Centroids finalized at:");

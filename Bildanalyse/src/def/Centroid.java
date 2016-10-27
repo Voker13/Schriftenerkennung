@@ -15,7 +15,7 @@ public class Centroid {
     }
     
     public String toString() {
-    	return "mX: "+mX+" mY: "+mY;
+    	return "("+mX + "," + mY + ")";
     }
 
     public void X(double newX) {

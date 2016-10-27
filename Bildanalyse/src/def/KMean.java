@@ -6,30 +6,22 @@ public class KMean {
     public static int NUM_CLUSTERS;
     public static int TOTAL_DATA;
 
-    public static ArrayList<Data> dataSet = new ArrayList<Data>();
-    public static ArrayList<Centroid> centroids = new ArrayList<Centroid>();
+    public static ArrayList<Data> dataSet;
+    public static ArrayList<Centroid> centroids;
     public static ArrayList<RGB> pixels;
 
     public static void initialize(int k, ArrayList<RGB> pix, int width, int height) {
 	NUM_CLUSTERS = k*k;
 	TOTAL_DATA = pix.size();
 	pixels = pix;
+	dataSet = new ArrayList<Data>();
+	centroids = new ArrayList<Centroid>();
 	
 	for (int i=0; i<k; i++) {
 		for (int j=0; j<k; j++) {
 			centroids.add(new Centroid(i*width/(k+1)+width/(k+1), j*height/(k+1)+height/(k+1)));
 		}
 	}
-	
-	for (Centroid centroid : centroids) {
-		System.out.println(centroid.toString());
-	}
-	
-	// Setze 4 glechm��ig verteilte Punkte (nur auf 50x50)
-//	centroids.add(new Centroid(15,15));
-//	centroids.add(new Centroid(15,35));
-//	centroids.add(new Centroid(35,15));
-//	centroids.add(new Centroid(35,35));
     }
     
     public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi) {

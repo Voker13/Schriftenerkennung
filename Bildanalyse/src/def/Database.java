@@ -32,6 +32,10 @@ public class Database {
 	Q = new DatabaseEntry("Q", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
 	
 	database = new ArrayList<>(Arrays.asList(A, B, C, H, L, O, Q));
+	
+	for (DatabaseEntry dbEntry : database) {
+	    System.out.println(dbEntry.getCharacter() + ": " + dbEntry.getCentroids());
+	}
     }
 
     public static String getCharacter(ArrayList<Centroid> centroids) {
