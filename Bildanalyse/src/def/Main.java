@@ -12,7 +12,7 @@ public class Main {
 	
 	BufferedImage bi = null;
 	try {
-	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/H.png"));
+	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/B.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
