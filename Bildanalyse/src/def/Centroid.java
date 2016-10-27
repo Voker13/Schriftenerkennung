@@ -1,3 +1,4 @@
+package def;
 public class Centroid {
 
     private double mX = 0.0;

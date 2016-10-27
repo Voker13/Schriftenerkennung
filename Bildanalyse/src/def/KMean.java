@@ -1,9 +1,6 @@
+package def;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 public class KMean {
     public static int NUM_CLUSTERS;
@@ -24,13 +21,7 @@ public class KMean {
 	centroids.add(new Centroid(35,35));
     }
     
-    public static ArrayList<Centroid> kMeanCluster(int k, File file) {
-	BufferedImage bi = null;
-	try {
-	    bi = ImageIO.read(file);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+    public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi) {
 	
 	RGB[][] pixel = new RGB[bi.getWidth()][bi.getHeight()];
 	

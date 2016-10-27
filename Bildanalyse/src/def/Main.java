@@ -1,5 +1,5 @@
+package def;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -7,10 +7,12 @@ import javax.imageio.ImageIO;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+	Database.initialize();
+	
 	BufferedImage bi = null;
 	try {
-	    bi = ImageIO.read(new File("C:\\Users\\Tobias\\OneDrive\\Dokumente\\B.png"));
+	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/H.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
