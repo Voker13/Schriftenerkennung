@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Picture {
 
-    public static int getRowHeight(BufferedImage bi) {
+    private static int getRowHeight(BufferedImage bi) {
 	int height = 0;
 
 	RGB[][] pixel = new RGB[bi.getWidth()][bi.getHeight()];
@@ -20,7 +20,7 @@ public class Picture {
 	return height;
     }
 
-    public static int getMinHeight(RGB[][] pixel, int w, int h) {
+    private static int getMinHeight(RGB[][] pixel, int w, int h) {
 	int height = 100000;
 
 	for (int y = 0; y < h; y++) {
@@ -36,7 +36,7 @@ public class Picture {
 	return height;
     }
 
-    public static int getMaxHeight(RGB[][] pixel, int w, int h) {
+    private static int getMaxHeight(RGB[][] pixel, int w, int h) {
 	int height = 0;
 
 	for (int y = 0; y < h; y++) {
@@ -53,7 +53,7 @@ public class Picture {
 
     }
 
-    public static int getCharacterStartX(RGB[][] pixel, int w, int h) {
+    private static int getCharacterStartX(RGB[][] pixel, int w, int h) {
 	int width = 10000000;
 
 	for (int y = 0; y < h; y++) {
@@ -67,7 +67,7 @@ public class Picture {
 	return width;
     }
 
-    public static int getCharacterEndX(RGB[][] pixel, int w, int h, int i) {
+    private static int getCharacterEndX(RGB[][] pixel, int w, int h, int i) {
 	int width = 0;
 
 	for (int x = 0; x < w; x++) {
@@ -87,4 +87,50 @@ public class Picture {
 
 	return width + i;
     }
+
+    private static int getCharacterStartYinX(RGB[][] pixel, int w, int h, int xFrom, int xTo) {
+	int yStart = 1000000;
+
+	for (int y = 0; y < h; y++) {
+	    for (int x = xFrom; x < xTo; x++) {
+		if (pixel[x][y].getY() < yStart && pixel[x][y].isBlack()) {
+		    yStart = pixel[x][y].getY();
+		}
+	    }
+	}
+
+	return yStart;
+    }
+
+    private static int getCharacterEndYinX(RGB[][] pixel, int w, int h, int xFrom, int xTo) {
+	int yStart = 0;
+
+	for (int y = 0; y < h; y++) {
+	    for (int x = xFrom; x < xTo; x++) {
+		if (pixel[x][y].getY() > yStart && pixel[x][y].isBlack()) {
+		    yStart = pixel[x][y].getY();
+		}
+	    }
+	}
+
+	return yStart;
+    }
+
+    public static BufferedImage getCharacter(BufferedImage bi) {
+	RGB[][] pixel = new RGB[bi.getWidth()][bi.getHeight()];
+
+	for (int y = 0; y < bi.getHeight(); y++) {
+	    for (int x = 0; x < bi.getWidth(); x++) {
+		pixel[x][y] = new RGB(bi.getRaster().getPixel(x, y, new int[4]), x, y, bi.getWidth() * y + x);
+	    }
+	}
+
+	int xStart = getCharacterStartX(pixel, bi.getWidth(), bi.getHeight());
+	int xEnd = getCharacterEndX(pixel, bi.getWidth(), bi.getHeight(), xStart);
+	int yStart = getCharacterStartYinX(pixel, bi.getWidth(), bi.getHeight(), xStart, xEnd);
+	int yEnd = getCharacterEndYinX(pixel, bi.getWidth(), bi.getHeight(), xStart, xEnd);
+
+	return bi.getSubimage(xStart, yStart, xEnd - xStart, yEnd - yStart);
+    }
+
 }
