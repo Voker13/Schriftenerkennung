@@ -8,12 +8,12 @@ import javax.imageio.ImageIO;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-	int k = 2;
+	int k = 1;
 	Database.initialize(k);
 	
 	BufferedImage bi = null;
 	try {
-	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/C.png"));
+	    bi = ImageIO.read(Main.class.getResourceAsStream("/res/A.png"));
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

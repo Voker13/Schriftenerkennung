@@ -14,9 +14,8 @@ public class Database {
     static DatabaseEntry B;
     static DatabaseEntry C;
     static DatabaseEntry H;
-    static DatabaseEntry L;
-    static DatabaseEntry O;
-    static DatabaseEntry Q;
+    static DatabaseEntry i;
+    
 
     static ArrayList<DatabaseEntry> database;
 
@@ -27,11 +26,9 @@ public class Database {
 	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/B.png"))));
 	C = new DatabaseEntry("C", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/C.png"))));
 	H = new DatabaseEntry("H", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
-	L = new DatabaseEntry("L", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
-	O = new DatabaseEntry("O", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
-	Q = new DatabaseEntry("Q", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
+	i = new DatabaseEntry("i", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/i.png"))));
 	
-	database = new ArrayList<>(Arrays.asList(A, B, C, H, L, O, Q));
+	database = new ArrayList<>(Arrays.asList(A, B, C, H, i));
 	
 	for (DatabaseEntry dbEntry : database) {
 	    System.out.println(dbEntry.getCharacter() + ": " + dbEntry.getCentroids());
