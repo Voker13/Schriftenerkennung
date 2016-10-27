@@ -10,18 +10,29 @@ public class KMean {
     public static ArrayList<Centroid> centroids = new ArrayList<Centroid>();
     public static ArrayList<RGB> pixels;
 
-    public static void initialize(int k, ArrayList<RGB> pix) {
-	NUM_CLUSTERS = k;
+    public static void initialize(int k, ArrayList<RGB> pix, int width, int height) {
+	NUM_CLUSTERS = k*k;
 	TOTAL_DATA = pix.size();
 	pixels = pix;
-	// Setze 4 glechm‰ﬂig verteilte Punkte (nur auf 50x50)
-	centroids.add(new Centroid(15,15));
-	centroids.add(new Centroid(15,35));
-	centroids.add(new Centroid(35,15));
-	centroids.add(new Centroid(35,35));
+	
+	for (int i=0; i<k; i++) {
+		for (int j=0; j<k; j++) {
+			centroids.add(new Centroid(i*width/k+1/2*k, j*height/k+height/2*k));
+		}
+	}
+	
+	for (Centroid centroid : centroids) {
+		System.out.println(centroid.toString());
+	}
+	
+	// Setze 4 glechmÔøΩÔøΩig verteilte Punkte (nur auf 50x50)
+//	centroids.add(new Centroid(15,15));
+//	centroids.add(new Centroid(15,35));
+//	centroids.add(new Centroid(35,15));
+//	centroids.add(new Centroid(35,35));
     }
     
-    public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi) {
+    public static ArrayList<Centroid> kMeanCluster(int k, BufferedImage bi, int width, int height) {
 	
 	RGB[][] pixel = new RGB[bi.getWidth()][bi.getHeight()];
 	
@@ -40,11 +51,11 @@ public class KMean {
 	    }
 	}
 	
-	return kMeanCluster(k,dataPoints);
+	return kMeanCluster(k,dataPoints,width,height);
     }
 
-    public static ArrayList<Centroid> kMeanCluster(int k, ArrayList<RGB> pix) {
-	initialize(k,pix);
+    public static ArrayList<Centroid> kMeanCluster(int k, ArrayList<RGB> pix, int width, int height) {
+	initialize(k,pix,width,height);
 	
 	final double bigNumber = Math.pow(10, 10);
 	double minimum = bigNumber;
