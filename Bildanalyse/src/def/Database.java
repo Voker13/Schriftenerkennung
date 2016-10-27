@@ -1,4 +1,5 @@
 package def;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +7,7 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 public class Database {
-    
+
     static int k = 4;
 
     static DatabaseEntry A;
@@ -17,8 +18,8 @@ public class Database {
     static DatabaseEntry O;
     static DatabaseEntry Q;
 
-    static ArrayList<DatabaseEntry> database = new ArrayList<>(Arrays.asList(A, B, C, H, L, O, Q));
-    
+    static ArrayList<DatabaseEntry> database;
+
     public static void initialize() throws IOException {
 	A = new DatabaseEntry("A", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
 	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
@@ -27,6 +28,8 @@ public class Database {
 	L = new DatabaseEntry("L", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
 	O = new DatabaseEntry("O", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
 	Q = new DatabaseEntry("Q", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
+	
+	database = new ArrayList<>(Arrays.asList(A, B, C, H, L, O, Q));
     }
 
     public static String getCharacter(ArrayList<Centroid> centroids) {

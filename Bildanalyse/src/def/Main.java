@@ -47,9 +47,9 @@ public class Main {
 	
 	int k = 4;
 
-	KMean.kMeanCluster(k, dataPoints);
+	ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints);
 
-	System.out.println(Database.getCharacter(KMean.centroids));
+	System.out.println(Database.getCharacter(centroids));
 
 	/*
 	dataPoints = new ArrayList<>();
