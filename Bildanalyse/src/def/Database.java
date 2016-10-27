@@ -21,13 +21,13 @@ public class Database {
     static ArrayList<DatabaseEntry> database;
 
     public static void initialize() throws IOException {
-	A = new DatabaseEntry("A", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	C = new DatabaseEntry("C", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	H = new DatabaseEntry("H", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	L = new DatabaseEntry("L", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	O = new DatabaseEntry("O", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
-	Q = new DatabaseEntry("Q", KMean.kMeanCluster(k, ImageIO.read(Main.class.getResourceAsStream("/res/H.png"))));
+	A = new DatabaseEntry("A", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/A.png"))));
+	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/B.png"))));
+	C = new DatabaseEntry("C", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/C.png"))));
+	H = new DatabaseEntry("H", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
+	L = new DatabaseEntry("L", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
+	O = new DatabaseEntry("O", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
+	Q = new DatabaseEntry("Q", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
 	
 	database = new ArrayList<>(Arrays.asList(A, B, C, H, L, O, Q));
     }

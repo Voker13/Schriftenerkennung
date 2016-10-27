@@ -105,7 +105,7 @@ public class Picture {
 	return character;
     }
     
-    public static BufferedImage getCharacterImage() {
+    public static BufferedImage getCharacterImage(BufferedImage bi) {
 	
 	
 	return null;
