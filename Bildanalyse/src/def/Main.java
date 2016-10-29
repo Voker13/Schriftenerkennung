@@ -24,20 +24,19 @@ public class Main {
 	
 	BufferedImage character = Picture.getCharacter(bi);
 	
-	System.out.println(character.getHeight());
+	System.out.println("height: "+character.getHeight());
 	
-	double scale = 1/(character.getHeight()/targetHeight);
-	System.out.println(scale);
+	double scale = (targetHeight / character.getHeight());
+	System.out.println("scale: "+scale);
 	int w = character.getWidth();
 	int h = character.getHeight();
 	BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 	AffineTransform at = new AffineTransform();
 	at.scale(scale, scale);
-	AffineTransformOp scaleOp = 
-	   new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+	AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 	after = scaleOp.filter(character, after);
 	
-	System.out.println(after.getHeight());
+	System.out.println("height: "+after.getHeight()+" (after)");
 	
 	RGB[][] pixel = new RGB[character.getWidth()][character.getHeight()];
 
