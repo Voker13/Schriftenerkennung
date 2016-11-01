@@ -1,6 +1,10 @@
 package def;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Picture {
 
@@ -131,6 +135,21 @@ public class Picture {
 	int yEnd = getCharacterEndYinX(pixel, bi.getWidth(), bi.getHeight(), xStart, xEnd);
 
 	return bi.getSubimage(xStart, yStart, xEnd - xStart, yEnd - yStart);
+    }
+    
+    public static void savePictureToFile(BufferedImage bi) {
+	File outputfile = new File("test.png");
+	try {
+	    ImageIO.write(bi, "png", outputfile);
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+
+    public static BufferedImage getScaledImage(BufferedImage character, int w, int h) {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }
