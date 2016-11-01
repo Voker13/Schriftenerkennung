@@ -24,10 +24,11 @@ public class Main {
 	
 	BufferedImage character = Picture.getCharacter(bi);
 	
-	System.out.println("height: "+character.getHeight());
+	
+	System.out.println("height: "+character.getHeight()+" (before)");
 	
 	double scale = (targetHeight / character.getHeight());
-	System.out.println("scale: "+scale);
+	System.out.println("scale: "+scale+" #targetheight: "+targetHeight);
 	int w = character.getWidth();
 	int h = character.getHeight();
 	BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
