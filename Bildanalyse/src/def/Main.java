@@ -29,6 +29,8 @@ public class Main {
 	int w = (int) (character.getWidth() * scale);
 	int h = (int) (character.getHeight() * scale);
 	
+	System.out.println("(Width: " + character.getWidth() + "px|Height: " + character.getHeight() + "px) of unscaled character");
+	
 	character = Picture.getScaledImage(character, w, h);
 	
 	System.out.println("(Width: " + character.getWidth() + "px|Height: " + character.getHeight() + "px) of scaled character");
