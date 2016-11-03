@@ -30,6 +30,8 @@ public class Main {
 	int h = (int) (character.getHeight() * scale);
 	
 	character = Picture.getScaledImage(character, w, h);
+	
+	System.out.println("(Width: " + character.getWidth() + "px|Height: " + character.getHeight() + "px) of scaled character");
 
 	RGB[][] pixel = new RGB[character.getWidth()][character.getHeight()];
 
