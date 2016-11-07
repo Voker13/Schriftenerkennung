@@ -31,7 +31,7 @@ public class Database {
 	database = new ArrayList<>(Arrays.asList(A, B, C, H, i));
     }
 
-    public static String getCharacter(ArrayList<Centroid> centroids) {
+    public static Character getCharacter(ArrayList<Centroid> centroids) {
 	double min = 10000;
 	String string = "";
 	for (int i = 0; i < database.size(); i++) {
@@ -41,7 +41,7 @@ public class Database {
 	    }
 	}
 	System.out.println("Distance: " + min);
-	return string;
+	return new Character(min, string);
     }
 
     private static double distance(ArrayList<Centroid> centroids, ArrayList<Centroid> centroids2) {
