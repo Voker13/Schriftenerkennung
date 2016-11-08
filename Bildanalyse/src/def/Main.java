@@ -11,6 +11,8 @@ public class Main {
 	private static int k = 2;
 	private static double targetHeight = 50.0;
 	private static double maxDistance = 20; //für kmean ->  if x < maxD then buchstabe irrelevant
+	private static double minWidthOfImage = 5; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
+	private static double leerzeichenOffset = 20; // in px
 
 	public static void main(String[] args) throws IOException {
 		Database.initialize(k);
@@ -19,7 +21,7 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello_world.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -30,43 +32,51 @@ public class Main {
 	
 			BufferedImage character = Picture.getCharacter(bi,offset);
 			
-			System.out.println("(Width: " + character.getWidth() + "px|Height: " + character.getHeight() + "px) of unscaled character");
+			BufferedImage scaledCharacter = Picture.getScaledImage(character, targetHeight);
 	
-			BufferedImage newCharacter = Picture.getScaledImage(character, targetHeight);
+			RGB[][] pixel = new RGB[scaledCharacter.getWidth()][scaledCharacter.getHeight()];
 	
-			System.out.println("(Width: " + newCharacter.getWidth() + "px|Height: " + newCharacter.getHeight() + "px) of scaled character");
-	
-			RGB[][] pixel = new RGB[newCharacter.getWidth()][newCharacter.getHeight()];
-	
-			for (int y = 0; y < newCharacter.getHeight(); y++) {
-				for (int x = 0; x < newCharacter.getWidth(); x++) {
-					pixel[x][y] = new RGB(newCharacter.getRaster().getPixel(x, y, new int[4]), x, y,
-							newCharacter.getWidth() * y + x);
+			for (int y = 0; y < scaledCharacter.getHeight(); y++) {
+				for (int x = 0; x < scaledCharacter.getWidth(); x++) {
+					pixel[x][y] = new RGB(scaledCharacter.getRaster().getPixel(x, y, new int[4]), x, y,
+							scaledCharacter.getWidth() * y + x);
 				}
 			}
 	
 			ArrayList<RGB> dataPoints = new ArrayList<>();
-			for (int y = 0; y < newCharacter.getHeight(); y++) {
-				for (int x = 0; x < newCharacter.getWidth(); x++) {
+			for (int y = 0; y < scaledCharacter.getHeight(); y++) {
+				for (int x = 0; x < scaledCharacter.getWidth(); x++) {
 					if (pixel[x][y].isBlack()) {
 						dataPoints.add(pixel[x][y]);
 					}
 				}
 			}
 	
-			ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints, newCharacter.getWidth(), newCharacter.getHeight());
+			ArrayList<Centroid> centroids = KMean.kMeanCluster(k, dataPoints, scaledCharacter.getWidth(), scaledCharacter.getHeight());
 	
-			Character ergCharacter = new Character(Database.getCharacter(centroids));
+			Character finalCharacter = new Character(Database.getCharacter(centroids));
+			System.out.println(finalCharacter.toString());
 			
 			// prüfen ob ein buchstabe gefunden wurde
-			if (ergCharacter.getDistance() > maxDistance) { 
-				break; // kein weiterer buchstabe in zeile
+			if (scaledCharacter.getWidth() < minWidthOfImage) { // Zeile ist zuende
+				
+				System.out.println("--> break (w="+scaledCharacter.getWidth()+"px) (offset="+offset+"px)");
+				break;
+				
+			} else if (finalCharacter.getDistance() > maxDistance) { // Leerzeichen gefunden
+				
+				System.out.println("--> Leerzeichen");
+				finalChars.add(" ");
+				offset+=leerzeichenOffset;
+				
 			} else {
-				finalChars.add(ergCharacter.getString()); // neuer buchstabe in zeile in ergebnisliste addn
+				
+				System.out.println("--> Character");
+				finalChars.add(finalCharacter.getString()); // neuer buchstabe in zeile in ergebnisliste addn
 				offset += character.getWidth();
-				System.out.println("string: "+ergCharacter.getString());
-				System.out.println("offset: "+offset);
+				
 			}
+			System.out.println(" ");
 			
 		}
 		

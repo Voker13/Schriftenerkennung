@@ -13,8 +13,14 @@ public class Database {
     static DatabaseEntry A;
     static DatabaseEntry B;
     static DatabaseEntry C;
+    static DatabaseEntry d;
+    static DatabaseEntry e;
     static DatabaseEntry H;
     static DatabaseEntry i;
+    static DatabaseEntry l;
+    static DatabaseEntry o;
+    static DatabaseEntry r;
+    static DatabaseEntry W;
     
 
     static ArrayList<DatabaseEntry> database;
@@ -25,10 +31,16 @@ public class Database {
 	A = new DatabaseEntry("A", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/A.png"))));
 	B = new DatabaseEntry("B", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/B.png"))));
 	C = new DatabaseEntry("C", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/C.png"))));
+	d = new DatabaseEntry("d", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/d.png"))));
+	e = new DatabaseEntry("e", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/e.png"))));
 	H = new DatabaseEntry("H", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/H.png"))));
 	i = new DatabaseEntry("i", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/i.png"))));
+	l = new DatabaseEntry("l", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/l.png"))));
+	o = new DatabaseEntry("o", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/o.png"))));
+	r = new DatabaseEntry("r", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/r.png"))));
+	W = new DatabaseEntry("W", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/W.png"))));
 	
-	database = new ArrayList<>(Arrays.asList(A, B, C, H, i));
+	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W ));
     }
 
     public static Character getCharacter(ArrayList<Centroid> centroids) {
@@ -40,7 +52,7 @@ public class Database {
 		string = database.get(i).getCharacter();
 	    }
 	}
-	System.out.println("Distance: " + min);
+//	System.out.println("Distance: " + min);
 	return new Character(min, string);
     }
 

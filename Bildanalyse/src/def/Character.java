@@ -20,6 +20,10 @@ public class Character {
 		this.distance = c.distance;
 		this.string = c.string;
 	}
+	
+	public String toString() {
+		return "String: "+this.string+" / Distance: "+this.distance;
+	}
 
 	public double getDistance() {
 		return distance;
