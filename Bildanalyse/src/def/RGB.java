@@ -8,6 +8,7 @@ public class RGB {
     private int x;
     private int y;
     private int absolutePosition;
+    private static int isSign = 150; //765 - 0
 
     public RGB() {
 	
@@ -28,11 +29,19 @@ public class RGB {
 	this.absolutePosition = absolutePosition;
     }
     
+//    public boolean isBlack() {
+//	if (red < 50 && green < 50 && blue < 50) {
+//	    return true;
+//	}
+//	else return false;
+//    }
+    
     public boolean isBlack() {
-	if (red < 50 && green < 50 && blue < 50) {
-	    return true;
-	}
-	else return false;
+    	if (255*3 - (red+green+blue) > isSign) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     @Override

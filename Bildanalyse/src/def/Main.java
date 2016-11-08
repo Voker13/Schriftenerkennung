@@ -10,9 +10,9 @@ public class Main {
 
 	private static int k = 2;
 	private static double targetHeight = 50.0;
-	private static double maxDistance = 20; //für kmean ->  if x < maxD then buchstabe irrelevant
-	private static double minWidthOfImage = 5; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
-	private static double leerzeichenOffset = 20; // in px
+	private static double maxDistance = 15; //für kmean ->  if x < maxD then buchstabe irrelevant
+	private static double minWidthOfImage = 20; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
+	private static double leerzeichenOffset = 10; // in px
 
 	public static void main(String[] args) throws IOException {
 		Database.initialize(k);
@@ -21,7 +21,7 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/res/ABC.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -29,8 +29,16 @@ public class Main {
 		int offset = 0;
 		
 		while (true) {
+			
+			System.out.println("offset: "+offset);
+			
+			if (bi.getWidth() - offset <= minWidthOfImage) { // Zeile ist zuende
+				System.out.println("--> break (w="+bi.getWidth()+"px) (offset="+offset+"px)");
+				break;
+			}
 	
 			BufferedImage character = Picture.getCharacter(bi,offset);
+			System.out.println("width: "+character.getWidth()+" /height: "+character.getHeight());
 			
 			BufferedImage scaledCharacter = Picture.getScaledImage(character, targetHeight);
 	
@@ -58,22 +66,17 @@ public class Main {
 			System.out.println(finalCharacter.toString());
 			
 			// prüfen ob ein buchstabe gefunden wurde
-			if (scaledCharacter.getWidth() < minWidthOfImage) { // Zeile ist zuende
+			if (finalCharacter.getDistance() < maxDistance && character.getWidth() > leerzeichenOffset) { // Buchstaben gefunden
 				
-				System.out.println("--> break (w="+scaledCharacter.getWidth()+"px) (offset="+offset+"px)");
-				break;
+				System.out.println("--> Character");
+				finalChars.add(finalCharacter.getString());
+				offset += character.getWidth();
 				
-			} else if (finalCharacter.getDistance() > maxDistance) { // Leerzeichen gefunden
+			} else { // Leerzeichen gefunden
 				
 				System.out.println("--> Leerzeichen");
 				finalChars.add(" ");
 				offset+=leerzeichenOffset;
-				
-			} else {
-				
-				System.out.println("--> Character");
-				finalChars.add(finalCharacter.getString()); // neuer buchstabe in zeile in ergebnisliste addn
-				offset += character.getWidth();
 				
 			}
 			System.out.println(" ");

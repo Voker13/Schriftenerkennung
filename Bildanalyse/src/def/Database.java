@@ -41,6 +41,7 @@ public class Database {
 	W = new DatabaseEntry("W", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/W.png"))));
 	
 	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W ));
+//	database = new ArrayList<>(Arrays.asList(A, B, C));
     }
 
     public static Character getCharacter(ArrayList<Centroid> centroids) {

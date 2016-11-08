@@ -141,6 +141,10 @@ public class Picture {
 		int yStart = getCharacterStartYinX(pixel, bi.getWidth(), bi.getHeight(), xStart, xEnd);
 		int yEnd = getCharacterEndYinX(pixel, bi.getWidth(), bi.getHeight(), xStart, xEnd);
 
+//		BufferedImage test = bi.getSubimage(xStart, yStart, xEnd - xStart, yEnd - yStart);
+//		System.out.println("x:"+test.+" y:"+test.getTileGridYOffset()+" w:"+test.getWidth()+" h:"+test.getHeight());
+//		System.out.println(xStart);
+		
 		return bi.getSubimage(xStart, yStart, xEnd - xStart, yEnd - yStart);
 	}
 
