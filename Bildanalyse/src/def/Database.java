@@ -43,7 +43,7 @@ public class Database {
 	leer = new DatabaseEntry("_", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/leer.png"))));
 	
 	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W, leer));
-//	database = new ArrayList<>(Arrays.asList(A, B, C));
+//	database = new ArrayList<>(Arrays.asList(H));
     }
 
     public static Character getCharacter(ArrayList<Centroid> centroids) {
@@ -51,11 +51,10 @@ public class Database {
 	String string = "";
 	for (int i = 0; i < database.size(); i++) {
 	    if (distance(database.get(i).getCentroids(), centroids) < min) {
-		min = distance(database.get(i).getCentroids(), centroids);
-		string = database.get(i).getCharacter();
+	    	min = distance(database.get(i).getCentroids(), centroids);
+	    	string = database.get(i).getCharacter();
 	    }
 	}
-//	System.out.println("Distance: " + min);
 	return new Character(min, string);
     }
 
