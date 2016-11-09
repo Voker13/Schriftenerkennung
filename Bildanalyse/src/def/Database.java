@@ -21,6 +21,7 @@ public class Database {
     static DatabaseEntry o;
     static DatabaseEntry r;
     static DatabaseEntry W;
+    static DatabaseEntry leer;
     
 
     static ArrayList<DatabaseEntry> database;
@@ -39,8 +40,9 @@ public class Database {
 	o = new DatabaseEntry("o", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/o.png"))));
 	r = new DatabaseEntry("r", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/r.png"))));
 	W = new DatabaseEntry("W", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/W.png"))));
+	leer = new DatabaseEntry("_", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/leer.png"))));
 	
-	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W ));
+	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W, leer));
 //	database = new ArrayList<>(Arrays.asList(A, B, C));
     }
 

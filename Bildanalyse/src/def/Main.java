@@ -11,8 +11,9 @@ public class Main {
 	private static int k = 2;
 	private static double targetHeight = 50.0;
 	private static double maxDistance = 15; //für kmean ->  if x < maxD then buchstabe irrelevant
-	private static double minWidthOfImage = 20; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
-	private static double leerzeichenOffset = 10; // in px
+	private static double minWidthOfImage = 9; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
+	public static double leerzeichenOffset = 10; // in px
+	private static int offset;
 
 	public static void main(String[] args) throws IOException {
 		Database.initialize(k);
@@ -21,12 +22,12 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/ABC.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		int offset = 0;
+		offset = 0;
 		
 		while (true) {
 			
@@ -36,14 +37,14 @@ public class Main {
 				System.out.println("--> break (w="+bi.getWidth()+"px) (offset="+offset+"px)");
 				break;
 			}
-	
+			
 			BufferedImage character = Picture.getCharacter(bi,offset);
-			System.out.println("width: "+character.getWidth()+" /height: "+character.getHeight());
+			Picture.savePictureToFile(character);
 			
 			BufferedImage scaledCharacter = Picture.getScaledImage(character, targetHeight);
-	
+			
 			RGB[][] pixel = new RGB[scaledCharacter.getWidth()][scaledCharacter.getHeight()];
-	
+			
 			for (int y = 0; y < scaledCharacter.getHeight(); y++) {
 				for (int x = 0; x < scaledCharacter.getWidth(); x++) {
 					pixel[x][y] = new RGB(scaledCharacter.getRaster().getPixel(x, y, new int[4]), x, y,
@@ -66,19 +67,18 @@ public class Main {
 			System.out.println(finalCharacter.toString());
 			
 			// prüfen ob ein buchstabe gefunden wurde
-			if (finalCharacter.getDistance() < maxDistance && character.getWidth() > leerzeichenOffset) { // Buchstaben gefunden
+			if (finalCharacter.getDistance() < maxDistance) { // Buchstaben gefunden
 				
 				System.out.println("--> Character");
 				finalChars.add(finalCharacter.getString());
-				offset += character.getWidth();
 				
-			} else { // Leerzeichen gefunden
+			} else { // nichts gefunden
 				
-				System.out.println("--> Leerzeichen");
-				finalChars.add(" ");
-				offset+=leerzeichenOffset;
+				System.out.println("--> nothing found");
+				finalChars.add("?");
 				
 			}
+//			offset+= character.getWidth(); //-minX WIRD ZURZEIT IN GETCHARACTER ÜBER GETTER UND SETTER NEU GESETZT
 			System.out.println(" ");
 			
 		}
@@ -89,6 +89,14 @@ public class Main {
 			System.err.print(finalChars.get(i));
 		}
 		
+	}
+
+	public static int getOffset() {
+		return offset;
+	}
+
+	public static void setOffset(int offset) {
+		Main.offset = offset;
 	}
 
 }
