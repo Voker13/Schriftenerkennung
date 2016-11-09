@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Main {
 
-	private static int k = 2; 
-	private static double maxDistance = 15; //für kmean ->  if x < maxD then buchstabe irrelevant
+	private static int k = 25; 
+	private static double maxDistance = 300; //für kmean ->  if x < maxD then buchstabe irrelevant
 	
 	private static double targetHeight = 50.0;
 	private static double minWidthOfImage = 9; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)

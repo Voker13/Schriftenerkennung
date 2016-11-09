@@ -87,7 +87,7 @@ public class Picture {
 		return c;
 	}
 
-	private static int getCharacterMinY(RGB[][] pixel, int w, int h, int xStart, int xEnd) {
+	private static int getCharacterMinY(RGB[][] pixel, int h, int xStart, int xEnd) {
 		
 		int c = 0; //zählt die weißen reihen
 		for (int y=0; y<h; y++) {
@@ -99,10 +99,16 @@ public class Picture {
 		return c;
 	}
 	
-	/*
+	/**
 	 * zählt die schwarzen reihen von startY bis h
+	 * @param pixel RBG[][]
+	 * @param h for -> yStart bis h
+	 * @param xStart StartX von row
+	 * @param xEnd endX von row
+	 * @param yStart Starty wert für for schleife
+	 * @return die höhe(anzahl der schwarzen reihen) in Int 
 	 */
-	private static int getCharacterHeight(RGB[][] pixel, int w, int h, int xStart, int xEnd, int yStart) {
+	private static int getCharacterHeight(RGB[][] pixel, int h, int xStart, int xEnd, int yStart) {
 		
 		int c = 0; //zählt die schwarzen reihen
 		for (int y=yStart; y<h; y++) {
@@ -160,9 +166,9 @@ public class Picture {
 		
 		int width = getCharacterWidth(pixel, bi.getWidth(), bi.getHeight(), minX);
 		
-		int minY = getCharacterMinY(pixel, bi.getWidth(), bi.getHeight(), minX, width);
+		int minY = getCharacterMinY(pixel, bi.getHeight(), minX, width);
 		
-		int height = getCharacterHeight(pixel, bi.getWidth(), bi.getHeight(), minX, width, minY);
+		int height = getCharacterHeight(pixel, bi.getHeight(), minX, width, minY);
 		
 		System.out.println("minX: "+minX+" minY: "+minY+" width: "+width+" height: "+height);
 		
