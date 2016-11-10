@@ -8,7 +8,7 @@ public class RGB {
     private int x;
     private int y;
     private int absolutePosition;
-    private static int isSign = 150; //765 - 0
+    private static int isSign = 200; //765 - 0
 
     public RGB() {
 	
@@ -37,7 +37,7 @@ public class RGB {
 //    }
     
     public boolean isBlack() {
-    	if (255*3 - (red+green+blue) > isSign) {
+    	if ((red+green+blue) < isSign) {
     		return true;
     	} else {
     		return false;
