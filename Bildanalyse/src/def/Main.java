@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Main {
 
-	private static int k = 25; 
-	private static double maxDistance = 300; //für kmean ->  if x < maxD then buchstabe irrelevant
+	private static int k = 2; 
+	private static double maxDistance = 30; //für kmean ->  if x < maxD then buchstabe irrelevant
 	
 	private static double targetHeight = 50.0;
 	private static double minWidthOfImage = 9; //abbruchbedingung wenn das Image zu schmal wird (img.width < minWidth)
@@ -23,7 +23,7 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/res/hi.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,9 +40,12 @@ public class Main {
 			}
 			
 			BufferedImage character = Picture.getCharacter(bi,offset);
-			Picture.savePictureToFile(character);
 			
+			Picture.savePictureToFile(character);
+		
 			BufferedImage scaledCharacter = Picture.getScaledImage(character, targetHeight);
+			
+			Picture.savePictureToFile(scaledCharacter);
 			
 			RGB[][] pixel = new RGB[scaledCharacter.getWidth()][scaledCharacter.getHeight()];
 			

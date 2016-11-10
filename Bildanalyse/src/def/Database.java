@@ -21,6 +21,7 @@ public class Database {
     static DatabaseEntry o;
     static DatabaseEntry r;
     static DatabaseEntry W;
+    static DatabaseEntry exc;
     static DatabaseEntry leer;
     
 
@@ -40,9 +41,10 @@ public class Database {
 	o = new DatabaseEntry("o", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/o.png"))));
 	r = new DatabaseEntry("r", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/r.png"))));
 	W = new DatabaseEntry("W", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/W.png"))));
+	exc = new DatabaseEntry("!", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/exclamation_mark.png"))));
 	leer = new DatabaseEntry("_", KMean.kMeanCluster(k, ImageIO.read(Database.class.getResourceAsStream("/res/leer.png"))));
 	
-	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W, leer));
+	database = new ArrayList<>(Arrays.asList(A, B, C, d, e, H, i, l, o, r, W,exc,leer));
 //	database = new ArrayList<>(Arrays.asList(H));
     }
 
@@ -63,7 +65,10 @@ public class Database {
 	for (int i = 0; i < centroids.size(); i++) {
 	    Centroid centroid1 = centroids.get(i);
 	    Centroid centroid2 = centroids2.get(i);
-	    distance += Math.sqrt((centroid1.X() - centroid2.X()) * (centroid1.X() - centroid2.X()) + (centroid1.Y() - centroid2.Y()) * (centroid1.Y() - centroid2.Y()));
+	    double dist =  Math.sqrt((centroid1.X() - centroid2.X()) * (centroid1.X() - centroid2.X()) + (centroid1.Y() - centroid2.Y()) * (centroid1.Y() - centroid2.Y()));
+	    if (dist > distance) {
+		distance = dist;
+	    }
 	}
 	return distance;
     }
