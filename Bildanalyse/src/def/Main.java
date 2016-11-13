@@ -23,7 +23,7 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello_World.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/test/Hello_World.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
