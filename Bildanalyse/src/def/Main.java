@@ -23,7 +23,7 @@ public class Main {
 
 		BufferedImage bi = null;
 		try {
-			bi = ImageIO.read(Main.class.getResourceAsStream("/res/hi.png"));
+			bi = ImageIO.read(Main.class.getResourceAsStream("/res/Hello_World.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class Main {
 		
 		while (true) {
 			
-			System.out.println("offset: "+offset);
+			System.out.println("biWidth:"+bi.getWidth()+" /offset: "+offset);
 			
 			if (bi.getWidth() - offset <= minWidthOfImage) { // Zeile ist zuende
 				System.out.println("--> break (w="+bi.getWidth()+"px) (offset="+offset+"px)");
